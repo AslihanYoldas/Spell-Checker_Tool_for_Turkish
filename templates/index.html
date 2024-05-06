@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Türkçe Yazım Denetleyici</title>
+    <link rel="stylesheet" href="static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome CDN Link for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container" >
+        <div class="header_text">
+            <h1 >Türkçe Yazım Denetleyici</h1>
+        </div>
+        <div class="header_group">
+             <div class="label">Cümle Girişi</div>
+            <div class="label">Yanlış Kelimeler</div>
+            <div class="label">Düzeltilmiş Cümle</div>
+        </div>
+
+
+        <!-- Formu mevcut sayfaya post ediyor. -->
+        <form action="/" method="post">
+            <div class="wrapper">
+
+            <div class="text-input">
+                <!--//max uzunluk 200 karakter olarak ayarlandı.-->
+                <textarea name="metin" maxlength="200"  spellcheck="false"  id="metin" class="from-text" placeholder="Metin giriniz">{{mtn}}</textarea>
+
+                <!--Yanlış yazılmış kelimeleri ayıklayıp yazdırdığımız kısım.-->
+
+                <label spellcheck="false" id="y_metin" class="to-text">
+                    {%for mtn1 in h_metin%}
+                        {{mtn1}}
+                    {%endfor%}
+                </label>
+
+                <!--Cümlenin düzeltilmiş halini yazdığımız kısım.-->
+                 <label spellcheck="false" id="d_metin"  class="to-text">
+                    {%for mtn2 in d_metin%}
+                        {{mtn2}}
+                    {%endfor%}
+                </label>
+
+            </div>
+        </div>
+        <!-- Formu post ettiğimiz submit butonumuz. -->
+        <button type="submit"  id="btn">Metni Düzelt</button>
+        </form>
+
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+
+        //Yanlış yazılmış kelimeler kırmızı metin halinde gösterilerek hataları vurgular
+        document.getElementById("y_metin").style.color="red";
+        //Metnin en son doğru yazılmış halini yeşil metin olarak gösterilir.
+        document.getElementById("d_metin").style.color="green";
+
+    </script>
+
+
+  </body>
+</html>
